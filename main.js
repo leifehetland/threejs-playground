@@ -112,6 +112,10 @@ function animate() {
 	ring.rotateY(0.01);
 	ring.rotateZ(0.01);
 
+	moon.rotateX(-0.02)
+	moon.rotateY( -0.01);
+	moon.rotateZ( -0.01);
+
 	controls.update();
 
 	renderer.render( scene, camera );	
