@@ -2,12 +2,15 @@ import './style.css';
 
 import * as THREE from 'three';
 
+// import OrbitControls Class
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+
 // 1. Scene - like a container
 const scene = new THREE.Scene();
 
 // 2. Camera - camera similar to what the human eyeballs would see
 	// camera takes in 3 args: Field of view (out of 360deg), aspect ratio, view frustum
-const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight);
+const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1);
 
 // 3. Renderer
 const renderer = new THREE.WebGLRenderer({
@@ -41,16 +44,24 @@ scene.add(pointLight, ambientLight);
 
 // Light Helper
 const lightHelper = new THREE.PointLightHelper(pointLight);
-scene.add(lightHelper);
+
+// Grid Helper
+const gridHelper = new THREE.GridHelper(200, 50)
+scene.add(lightHelper, gridHelper);
+
+// Added orbit controls to allow click and drag movement of camera and zoom
+const controls = new OrbitControls(camera, renderer.domElement)
 
 // Recursive function that gives us an infinite loop- similar to a game loop
 function animate() {
 	requestAnimationFrame( animate );
 
 	// rotate methods available on a RingGeometry
-	ring.rotateX(.007)
-	ring.rotateY(.01);
-	ring.rotateZ(.003);
+	ring.rotateX(0.007)
+	ring.rotateY(0.01);
+	ring.rotateZ(0.003);
+
+	controls.update();
 
 	renderer.render( scene, camera );	
 }
