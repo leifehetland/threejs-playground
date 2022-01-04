@@ -52,6 +52,25 @@ scene.add(lightHelper, gridHelper);
 // Added orbit controls to allow click and drag movement of camera and zoom
 const controls = new OrbitControls(camera, renderer.domElement)
 
+// create and add a "star" function
+function addStar() {
+	const geometry = new THREE.SphereGeometry(0.25, 50, 50);
+	const material = new THREE.MeshStandardMaterial({ color: 0x4e32ef })
+	const star = new THREE.Mesh( geometry, material );
+
+	// Destructure an array of 3 random values for x, y, and z coordinates 
+	// using Three js MathUtils and randFloatSpread helper method- returns a number between negative and positive the number passed in
+	const [x, y, z] = Array(3).fill().map(() => THREE.MathUtils.randFloatSpread( 100 ));
+
+	star.position.set(x,y,z);
+
+	scene.add(star);
+}
+
+// Creates 200 hundred randomly placed stars
+Array(200).fill().forEach(addStar);
+
+
 // Recursive function that gives us an infinite loop- similar to a game loop
 function animate() {
 	requestAnimationFrame( animate );
