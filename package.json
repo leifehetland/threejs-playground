@@ -1,0 +1,19 @@
+{
+  "name": "3d_portfolio_site",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "serve": "vite preview"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "three": "^0.136.0"
+  },
+  "devDependencies": {
+    "vite": "^2.7.10"
+  }
+}
