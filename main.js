@@ -55,7 +55,8 @@ const controls = new OrbitControls(camera, renderer.domElement)
 // create and add a "star" function
 function addStar() {
 	const geometry = new THREE.SphereGeometry(0.25, 50, 50);
-	const material = new THREE.MeshStandardMaterial({ color: 0x4e32ef })
+	const material = new THREE.MeshStandardMaterial({ color: 0xFF10F0 })
+
 	const star = new THREE.Mesh( geometry, material );
 
 	// Destructure an array of 3 random values for x, y, and z coordinates 
@@ -68,8 +69,12 @@ function addStar() {
 }
 
 // Creates 200 hundred randomly placed stars
-Array(200).fill().forEach(addStar);
+Array(500).fill().forEach(addStar);
 
+// adding a custom background texture
+// can also pass a callback function in here while the image is loading
+const bgTexture = new THREE.TextureLoader().load('wiresky.jpg');
+scene.background = bgTexture;
 
 // Recursive function that gives us an infinite loop- similar to a game loop
 function animate() {
