@@ -20,16 +20,27 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 camera.position.setZ(30);
 
 // adding Geometry
-const geometry = new THREE.RingGeometry( 1, 5, 32 );
+const ring = new THREE.RingGeometry( 1, 5, 32 );
 
 // adding a material- like wrapping paper for our objs
 // custom shaders can be written in WebGL
 const material = new THREE.MeshBasicMaterial( { color: 'hotpink', side: THREE.DoubleSide, wireframe: true } );
 
 // Creating a mesh to combine the geometry and the material
-const mesh = new THREE.Mesh( geometry, material );
+const mesh = new THREE.Mesh( ring, material );
 scene.add( mesh );
 
+// Recursive function that gives us an infinite loop- similar to a game loop
+function animate() {
+	requestAnimationFrame( animate );
 
-renderer.render(scene,camera);
+	// rotate methods available on a RingGeometry
+	ring.rotateX(.007)
+	ring.rotateY(.01);
+	ring.rotateZ(.003);
+
+	renderer.render( scene, camera );	
+}
+
+animate();
 
