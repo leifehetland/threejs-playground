@@ -23,7 +23,7 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 camera.position.setZ(30);
 
 // adding Geometry
-const ring = new THREE.RingGeometry( 1, 5, 32 );
+const ring = new THREE.RingGeometry( 7, 15, 1 );
 
 // adding a material- like wrapping paper for our objs
 // custom shaders can be written in WebGL
@@ -73,8 +73,35 @@ Array(500).fill().forEach(addStar);
 
 // adding a custom background texture
 // can also pass a callback function in here while the image is loading
-const bgTexture = new THREE.TextureLoader().load('wiresky.jpg');
+const bgTexture = new THREE.TextureLoader().load('wire-sky.jpg');
 scene.background = bgTexture;
+
+// Avatar
+const glitchyTexture = new THREE.TextureLoader().load('glitched_bunisher.jpg');
+
+const glitchy = new THREE.Mesh(
+	new THREE.BoxGeometry(3, 3, 3),
+	new THREE.MeshBasicMaterial( { map: glitchyTexture } )
+)
+
+
+scene.add(glitchy);
+
+// Moon
+const moonTexture = new THREE.TextureLoader().load('pattern.jpg');
+const normalTexture = new THREE.TextureLoader().load('normal.jpg');
+
+const moon = new THREE.Mesh(
+	new THREE.SphereGeometry(3, 32, 32),
+	new THREE.MeshBasicMaterial( { 
+		map: moonTexture,
+		normalMap: normalTexture
+	 } )
+)
+
+
+scene.add(moon);
+
 
 // Recursive function that gives us an infinite loop- similar to a game loop
 function animate() {
@@ -83,7 +110,7 @@ function animate() {
 	// rotate methods available on a RingGeometry
 	ring.rotateX(0.007)
 	ring.rotateY(0.01);
-	ring.rotateZ(0.003);
+	ring.rotateZ(0.01);
 
 	controls.update();
 
