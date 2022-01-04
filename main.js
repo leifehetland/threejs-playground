@@ -19,4 +19,17 @@ renderer.setSize( window.innerWidth, window.innerHeight );
 
 camera.position.setZ(30);
 
-renderer.render(scene,camera)
+// adding Geometry
+const geometry = new THREE.RingGeometry( 1, 5, 32 );
+
+// adding a material- like wrapping paper for our objs
+// custom shaders can be written in WebGL
+const material = new THREE.MeshBasicMaterial( { color: 'hotpink', side: THREE.DoubleSide, wireframe: true } );
+
+// Creating a mesh to combine the geometry and the material
+const mesh = new THREE.Mesh( geometry, material );
+scene.add( mesh );
+
+
+renderer.render(scene,camera);
+
